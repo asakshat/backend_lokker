@@ -10,7 +10,9 @@ const app = express();
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
-
+app.get('/', (req, res) => {
+	res.send('Hello Express');
+});
 app.use('/api/user', userAuth);
 app.use(authenticateToken);
 
