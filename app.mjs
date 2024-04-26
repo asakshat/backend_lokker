@@ -2,15 +2,12 @@ import express from 'express';
 import dotenv from 'dotenv';
 import userAuth from './routes/userAuth.mjs';
 import { authenticateToken } from './middlewares/authenticate.mjs';
-import { findUsername } from './configs/queries.mjs';
-
-dotenv.config();
+i = dotenv.config();
 
 const app = express();
 
 app.use(express.json());
 
-const user = await findUsername('RetroSax');
 console.log(user);
 
 const port = process.env.PORT || 3000;
