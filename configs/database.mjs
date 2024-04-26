@@ -4,12 +4,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const pool = new Pool({
-	host: 'localhost',
-	user: 'postgres',
-	password: process.env.DB_PASSWORD,
-	database: 'Locker',
-	port: 5432,
+const pool = new pg.Pool({
+	connectionString: process.env.DATABASE_URL,
 });
 
 export async function executeQuery(query, values) {
