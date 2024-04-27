@@ -28,7 +28,6 @@ export const signUpFunction = async (username, email, password) => {
 			'INSERT INTO "User"(username,email,password_hash) VALUES ($1,$2,$3)',
 			[username, email, hash]
 		);
-
 		return user;
 	}
 };

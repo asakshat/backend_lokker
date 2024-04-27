@@ -77,10 +77,9 @@ export async function findMessageId(message_id, lobby_id) {
 	return result[0].message_id;
 }
 
-export async function isAdmin(username) {
-	const user = await findUserIdByUsername(username);
+export async function isAdmin(user_id) {
 	const admin = await executeQuery(
-		'SELECT admin FROM "User" where user_id = $1',
+		'SELECT admin_id FROM "Team" where user_id = $1',
 		[user]
 	);
 	if (admin.length === 0) {
