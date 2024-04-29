@@ -2,7 +2,7 @@ import { executeQuery } from '../configs/database.mjs';
 import {
 	deleteMessageFunction,
 	createGroupFunction,
-} from '../models/groupModel.mjs';
+} from '../models/adminModel.mjs';
 
 export const deleteMessage = async (req, res) => {
 	const { lobby_id, message_id } = req.params;
