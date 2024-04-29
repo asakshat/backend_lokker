@@ -2,7 +2,6 @@ import express from 'express';
 import {
 	loginUser,
 	signUpUser,
-	joinGroup,
 	leaveGroup,
 } from '../controllers/userController.mjs';
 const router = express.Router();
