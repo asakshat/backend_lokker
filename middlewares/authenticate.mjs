@@ -9,6 +9,9 @@ export async function authenticateToken(req, res, next) {
 		return res.status(401).send(`Unauthorized`);
 	}
 	const user = await verify(token, process.env.TOKEN);
+	if (!user) {
+		return res.status(401).send(`Cant verify user`);
+	}
 	req.user = user;
 	next();
 }
