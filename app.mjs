@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 const corsOption = {
-	origin: 'https://locker-4eff66da6769.herokuapp.com',
+	origin: 'http://localhost:5173',
 };
 app.use(cors(corsOption));
 app.use(express.json());
