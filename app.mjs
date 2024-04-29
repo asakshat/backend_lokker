@@ -10,9 +10,7 @@ import { authenticateToken } from './middlewares/authenticate.mjs';
 dotenv.config();
 
 const app = express();
-app.get('/hello', (req, res) => {
-	res.send('Hello Express');
-});
+
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
@@ -22,6 +20,9 @@ app.get('/', (req, res) => {
 
 app.use('/api/user', userAuth);
 app.use(authenticateToken);
+app.get('/hello', (req, res) => {
+	res.send('Hello Express');
+});
 app.use('/api/admin', adminRoute);
 app.use('/api/group', groupRoute);
 app.use('/api/directmessage', directMessageRoute);
