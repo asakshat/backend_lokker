@@ -1,3 +1,4 @@
+import { executeQuery } from '../configs/database.mjs';
 export const sendDirectMessageFunction = async (
 	sender_id,
 	receiver_id,
