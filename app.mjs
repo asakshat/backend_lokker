@@ -10,7 +10,9 @@ import { authenticateToken } from './middlewares/authenticate.mjs';
 dotenv.config();
 
 const app = express();
-
+app.get('/hello', (req, res) => {
+	res.send('Hello Express');
+});
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
