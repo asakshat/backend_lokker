@@ -55,21 +55,21 @@ export async function findUsername(username) {
 	return result[0].username;
 }
 
-export async function findLobbyId(lobby_id) {
+export async function findGroupId(group_id) {
 	const result = await executeQuery(
-		'SELECT lobby_id FROM Lobby where lobby_id = $1',
-		[lobby_id]
+		'SELECT group_id FROM "Group" where group_id = $1',
+		[group_id]
 	);
 	if (result.length === 0) {
 		return null;
 	}
-	return result[0].lobby_id;
+	return result[0].group_id;
 }
 
-export async function findMessageId(message_id, lobby_id) {
+export async function findMessageId(group_id, message_id) {
 	const result = await executeQuery(
-		'SELECT message_id FROM Message where message_id = $1 AND lobby_id = $2',
-		[message_id, lobby_id]
+		'SELECT message_id FROM Message where message_id = $1 AND group_id = $2',
+		[message_id, group_id]
 	);
 	if (result.length === 0) {
 		return null;
@@ -77,13 +77,13 @@ export async function findMessageId(message_id, lobby_id) {
 	return result[0].message_id;
 }
 
-export async function isAdmin(user_id) {
+export async function isAdmin(group_admin) {
 	const admin = await executeQuery(
-		'SELECT admin_id FROM "Team" where user_id = $1',
-		[user]
+		'SELECT group_admin FROM "Group" where group_admin = $1',
+		[group_admin]
 	);
 	if (admin.length === 0) {
 		return null;
 	}
-	return admin[0].admin_id;
+	return admin[0].group_admin;
 }

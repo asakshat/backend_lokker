@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import userAuth from './routes/userAuth.mjs';
+import userAuth from './routes/userRoute.mjs';
 import adminRoute from './routes/adminRoute.mjs';
 
 import { authenticateToken } from './middlewares/authenticate.mjs';
