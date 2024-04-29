@@ -1,15 +1,3 @@
-export const createGroupFunction = async (group_name, group_admin) => {
-	const group = await executeQuery(
-		'INSERT INTO "Group"(group_name,group_admin) VALUES ($1,$2) RETURNING group_id',
-		[group_name, group_admin]
-	);
-	await executeQuery(
-		'INSERT INTO "GroupMembers"(user_id, group_id) VALUES ($1,$2)',
-		[group_admin, group[0].group_id]
-	);
-	return group;
-};
-
 export const joinGroupFunction = async (user_id, group_id) => {
 	const group = await executeQuery(
 		'SELECT group_id FROM "Group" WHERE group_id = $1',
@@ -54,7 +42,7 @@ export const leaveGroupFunction = async (user_id, group_id) => {
 	return leave;
 };
 
-const postMessageFunction = async (user_id, group_id) => {
+export const postMessageFunction = async (user_id, group_id) => {
 	const group = await executeQuery(
 		'SELECT group_id FROM "Group" WHERE group_id = $1',
 		[group_id]

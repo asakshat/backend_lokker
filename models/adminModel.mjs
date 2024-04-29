@@ -13,3 +13,15 @@ export const deleteMessageFunction = async (group_id, message_id) => {
 		return deleted;
 	}
 };
+
+export const createGroupFunction = async (group_name, group_admin) => {
+	const group = await executeQuery(
+		'INSERT INTO "Group"(group_name,group_admin) VALUES ($1,$2) RETURNING group_id',
+		[group_name, group_admin]
+	);
+	await executeQuery(
+		'INSERT INTO "GroupMembers"(user_id, group_id) VALUES ($1,$2)',
+		[group_admin, group[0].group_id]
+	);
+	return group;
+};
