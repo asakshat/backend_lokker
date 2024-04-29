@@ -1,7 +1,7 @@
 import {
 	joinGroupFunction,
 	leaveGroupFunction,
-	posMessageFunction,
+	postMessageFunction,
 } from '../models/groupModel.mjs';
 
 const joinGroup = async (req, res) => {
@@ -28,7 +28,7 @@ const leaveGroup = async (req, res) => {
 const postMessage = async (req, res) => {
 	const { user_id, group_id } = req.body;
 	try {
-		await posMessageFunction(user_id, group_id);
+		await postMessageFunction(user_id, group_id);
 		res.status(200).send('Message posted');
 	} catch (err) {
 		res.status(400).send(err.message);
