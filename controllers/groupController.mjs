@@ -25,7 +25,7 @@ const leaveGroup = async (req, res) => {
 	}
 };
 
-const posMessage = async (req, res) => {
+const postMessage = async (req, res) => {
 	const { user_id, group_id } = req.body;
 	try {
 		await posMessageFunction(user_id, group_id);
@@ -35,4 +35,4 @@ const posMessage = async (req, res) => {
 	}
 };
 
-export { joinGroup, leaveGroup, posMessage };
+export { joinGroup, leaveGroup, postMessage };
