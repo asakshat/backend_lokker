@@ -4,13 +4,16 @@ import userAuth from './routes/userRoute.mjs';
 import adminRoute from './routes/adminRoute.mjs';
 import groupRoute from './routes/groupRoute.mjs';
 import directMessageRoute from './routes/directMessageRoute.mjs';
-
 import { authenticateToken } from './middlewares/authenticate.mjs';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
-
+const corsOption = {
+	origin: 'https://locker-4eff66da6769.herokuapp.com',
+};
+app.use(cors(corsOption));
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
