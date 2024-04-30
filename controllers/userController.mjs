@@ -19,13 +19,11 @@ const loginUser = async (req, res) => {
 	try {
 		const user = await loginFunction(email, password);
 		const accessToken = await createToken(user.id, '1d');
-		res
-			.status(200)
-			.json({
-				username: user.username,
-				email: user.email,
-				accessToken: accessToken,
-			});
+		res.status(200).json({
+			username: user.username,
+			email: user.email,
+			accessToken: accessToken,
+		});
 	} catch (err) {
 		res.status(400).json({ error: err.message });
 	}
@@ -45,5 +43,21 @@ const signUpUser = async (req, res) => {
 		res.status(400).json({ error: err.message });
 	}
 };
+const searchUser = async (req, res) => {
+	const { username } = req.params;
+	try {
+		const user = await executeQuery(
+			'SELECT username,email FROM "User" WHERE username = $1',
+			[username]
+		);
+		if (user.length === 0) {
+			res.status(404).json({ error: 'User not found' });
+		} else {
+			res.status(200).json({ username: user[0].username });
+		}
+	} catch (err) {
+		res.status(400).json({ error: err.message });
+	}
+};
 
-export { loginUser, signUpUser };
+export { loginUser, signUpUser, searchUser };
