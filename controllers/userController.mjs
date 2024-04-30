@@ -32,7 +32,9 @@ const signUpUser = async (req, res) => {
 		const userId = await findUserIdByUsername(username);
 		const accessToken = await createToken(userId, '1d');
 
-		res.status(200).json({ username: username, accessToken: accessToken });
+		res
+			.status(200)
+			.json({ username: username, email: email, accessToken: accessToken });
 	} catch (err) {
 		res.status(400).json({ error: err.message });
 	}
