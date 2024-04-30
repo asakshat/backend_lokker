@@ -25,7 +25,7 @@ export const signUpFunction = async (username, email, password) => {
 		const salt = await bcrypt.genSalt(10);
 		const hash = await bcrypt.hash(password, salt);
 		const user = await executeQuery(
-			'INSERT INTO "User"(username,email,password_hash) VALUES ($1,$2,$3)',
+			'INSERT INTO "User"(username,email,password_hash) VALUES ($1,$2,$3)RETURNING username',
 			[username, email, hash]
 		);
 		return user;
@@ -48,6 +48,6 @@ export const loginFunction = async (email, password) => {
 		if (!match) {
 			throw Error('Invalid password');
 		}
-		return user;
+		return user[0];
 	}
 };

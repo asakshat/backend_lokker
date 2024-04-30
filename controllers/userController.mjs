@@ -19,7 +19,7 @@ const loginUser = async (req, res) => {
 	try {
 		const user = await loginFunction(email, password);
 		const accessToken = await createToken(user.id, '1d');
-		res.status(200).json({ user, accessToken });
+		res.status(200).json({ user: user, accessToken: accessToken });
 	} catch (err) {
 		res.status(400).json({ error: err.message });
 	}
@@ -32,7 +32,7 @@ const signUpUser = async (req, res) => {
 		const userId = await findUserIdByUsername(username);
 		const accessToken = await createToken(userId, '1d');
 
-		res.status(200).json({ username, accessToken });
+		res.status(200).json({ user: user, accessToken: accessToken });
 	} catch (err) {
 		res.status(400).json({ error: err.message });
 	}
