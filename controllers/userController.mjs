@@ -19,7 +19,13 @@ const loginUser = async (req, res) => {
 	try {
 		const user = await loginFunction(email, password);
 		const accessToken = await createToken(user.id, '1d');
-		res.status(200).json({ user: user, accessToken: accessToken });
+		res
+			.status(200)
+			.json({
+				username: user.username,
+				email: user.email,
+				accessToken: accessToken,
+			});
 	} catch (err) {
 		res.status(400).json({ error: err.message });
 	}
