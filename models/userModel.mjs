@@ -24,11 +24,10 @@ export const signUpFunction = async (username, email, password) => {
 	} else if (existsEmail === null) {
 		const salt = await bcrypt.genSalt(10);
 		const hash = await bcrypt.hash(password, salt);
-		const user = await executeQuery(
-			'INSERT INTO "User"(username,email,password_hash) VALUES ($1,$2,$3)RETURNING username',
+		await executeQuery(
+			'INSERT INTO "User"(username,email,password_hash) VALUES ($1,$2,$3)',
 			[username, email, hash]
 		);
-		return user;
 	}
 };
 
