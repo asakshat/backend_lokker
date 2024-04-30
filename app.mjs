@@ -20,7 +20,9 @@ const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
 	res.send('Hello Express');
 });
-
+app.get('/verifytoken', authenticateToken, (req, res) => {
+	res.status(200).send('Token is valid');
+});
 app.use('/api/user', userAuth);
 app.use(authenticateToken);
 app.get('/hello', (req, res) => {
