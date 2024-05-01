@@ -47,18 +47,20 @@ const searchUser = async (req, res) => {
 	const { username } = req.params;
 	try {
 		const user = await executeQuery(
-			'SELECT username FROM "User" WHERE username Like $1',
+			'SELECT username , user_id FROM "User" WHERE username Like $1',
 			[username]
 		);
 		if (user.length === 0) {
 			res.status(404).json({ error: 'User not found' });
 		} else {
-			const usernames = user.map((users) => users.username);
-			res.status(200).json({ users: usernames });
+			const response = user.map((user) => ({
+				username: user.username,
+				user_id: user.user_id,
+			}));
+			res.status(200).json(response);
 		}
 	} catch (err) {
 		res.status(400).json({ error: err.message });
 	}
 };
-
 export { loginUser, signUpUser, searchUser };
