@@ -53,7 +53,7 @@ const searchUser = async (req, res) => {
 		if (user.length === 0) {
 			res.status(404).json({ error: 'User not found' });
 		} else {
-			res.status(200).json({ username: user[0].username });
+			res.status(200).json({ users: user.username });
 		}
 	} catch (err) {
 		res.status(400).json({ error: err.message });
