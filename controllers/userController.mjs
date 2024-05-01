@@ -23,6 +23,7 @@ const loginUser = async (req, res) => {
 			username: user.username,
 			email: user.email,
 			accessToken: accessToken,
+			user_id: user.user_id,
 		});
 	} catch (err) {
 		res.status(400).json({ error: err.message });
