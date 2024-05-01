@@ -47,7 +47,7 @@ const searchUser = async (req, res) => {
 	const { username } = req.params;
 	try {
 		const user = await executeQuery(
-			'SELECT username,email FROM "User" WHERE username = $1',
+			'SELECT username,email FROM "User" WHERE username Like $1',
 			[username]
 		);
 		if (user.length === 0) {
