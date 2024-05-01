@@ -47,13 +47,14 @@ const searchUser = async (req, res) => {
 	const { username } = req.params;
 	try {
 		const user = await executeQuery(
-			'SELECT username,email FROM "User" WHERE username Like $1',
+			'SELECT username FROM "User" WHERE username Like $1',
 			[username]
 		);
 		if (user.length === 0) {
 			res.status(404).json({ error: 'User not found' });
 		} else {
-			res.status(200).json({ users: user.username });
+			const usernames = user.map((users) => users.username);
+			res.status(200).json({ users: usernames });
 		}
 	} catch (err) {
 		res.status(400).json({ error: err.message });
