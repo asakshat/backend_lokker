@@ -41,35 +41,17 @@ export const io = new SocketIOServer(httpServer, {
 	},
 });
 
-let userSockets = {};
+let onlineUser = [];
 
 io.on('connection', (socket) => {
-	console.log('a user connected');
-
-	// When a user connects, store their socket ID
-	socket.on('user connected', (userId) => {
-		userSockets[userId] = socket.id;
-	});
-
-	socket.on('new message', (msg) => {
-		const receiverSocketId = userSockets[msg.receiver_id];
-		if (receiverSocketId) {
-			io.to(receiverSocketId).emit('new message', msg);
-		}
-	});
-
-	socket.on('disconnect', () => {
-		console.log('user disconnected');
-
-		for (let userId in userSockets) {
-			if (userSockets[userId] === socket.id) {
-				delete userSockets[userId];
-				break;
-			}
-		}
+	console.log('new connection', socket.id);
+	socket.on('online', (userId) => {
+		!onlineUser.some((user) => user.userId === userId) &&
+			onlineUser.push({ userId, socketId: socket.id });
 	});
 });
 
 httpServer.listen(port, () => {
 	console.log(`Server is running at http://localhost:${port}`);
 });
+n;
