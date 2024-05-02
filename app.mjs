@@ -10,9 +10,24 @@ import cors from 'cors';
 dotenv.config();
 
 const app = express();
-const corsOption = {
-	origin: 'http://localhost:5173',
+
+const allowedOrigins = [
+	'https://lokkerroom-d7516.web.app/',
+	'http://127.0.0.1:5173',
+];
+const corsOptions = {
+	origin: (origin, callback) => {
+		if (!origin || allowedOrigins.includes(origin)) {
+			callback(null, true);
+		} else {
+			callback(new Error('Not allowed by CORS'));
+		}
+	},
+	credentials: true,
+	methods: ['GET', 'POST', 'DELETE', 'PATCH'],
+	allowedHeaders: ['Content-Type', 'Authorization', 'username'],
 };
+
 app.use(cors(corsOption));
 app.use(express.json());
 
