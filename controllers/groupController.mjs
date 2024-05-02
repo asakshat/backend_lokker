@@ -1,3 +1,4 @@
+import { executeQuery } from '../configs/database.mjs';
 import {
 	joinGroupFunction,
 	leaveGroupFunction,
@@ -30,6 +31,15 @@ const postMessage = async (req, res) => {
 	try {
 		await postMessageFunction(user_id, group_id);
 		res.status(200).send('Message posted');
+	} catch (err) {
+		res.status(400).send(err.message);
+	}
+};
+
+const listGroup = async (req, res) => {
+	try {
+		const group = await executeQuery('SELECT * FROM "Group"');
+		res.status(200).send(group);
 	} catch (err) {
 		res.status(400).send(err.message);
 	}

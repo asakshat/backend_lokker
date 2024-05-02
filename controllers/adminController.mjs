@@ -15,7 +15,8 @@ export const deleteMessage = async (req, res) => {
 };
 
 export const createGroup = async (req, res) => {
-	const { group_name, group_admin } = req.body;
+	const { group_name } = req.body;
+	const { group_admin } = req.params;
 	const groupName = await executeQuery(
 		'SELECT group_name FROM "Group" where group_name = $1',
 		[group_name]
