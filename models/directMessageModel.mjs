@@ -26,7 +26,7 @@ export const getDirectMessagesFunction = async (sender_id, receiver_id) => {
 		throw Error('Please provide sender_id and receiver_id');
 	}
 	const messages = await executeQuery(
-		'SELECT message FROM "DirectMessage" WHERE sender_id = $1 AND receiver_id = $2',
+		'SELECT message FROM "DirectMessage" WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1)',
 		[sender_id, receiver_id]
 	);
 	return messages;
