@@ -14,7 +14,6 @@ export const sendDirectMessage = async (req, res) => {
 			receiver_id,
 			message
 		);
-		io.to(receiver_id).emit('new message', newMessage);
 		res.status(200).json(newMessage);
 	} catch (err) {
 		res.status(400).send(err.message);
