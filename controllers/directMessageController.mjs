@@ -4,6 +4,7 @@ import {
 } from '../models/directMessageModel.mjs';
 import { executeQuery } from '../configs/database.mjs';
 import { io } from '../app.mjs';
+
 export const sendDirectMessage = async (req, res) => {
 	const { sender_id, receiver_id } = req.params;
 	const { message } = req.body;

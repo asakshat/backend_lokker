@@ -41,15 +41,32 @@ export const io = new SocketIOServer(httpServer, {
 	},
 });
 
+let userSockets = {};
+
 io.on('connection', (socket) => {
 	console.log('a user connected');
 
+	// When a user connects, store their socket ID
+	socket.on('user connected', (userId) => {
+		userSockets[userId] = socket.id;
+	});
+
 	socket.on('new message', (msg) => {
-		io.emit('new message', msg);
+		const receiverSocketId = userSockets[msg.receiver_id];
+		if (receiverSocketId) {
+			io.to(receiverSocketId).emit('new message', msg);
+		}
 	});
 
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
+
+		for (let userId in userSockets) {
+			if (userSockets[userId] === socket.id) {
+				delete userSockets[userId];
+				break;
+			}
+		}
 	});
 });
 
