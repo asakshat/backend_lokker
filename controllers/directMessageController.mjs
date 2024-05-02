@@ -45,3 +45,16 @@ export const messagedUsers = async (req, res) => {
 		res.status(400).json({ error: err.message });
 	}
 };
+
+export const deleteDirectMessage = async (req, res) => {
+	const { user_id, message_id } = req.params;
+	try {
+		const response = await executeQuery(
+			`DELETE FROM "DirectMessage" WHERE (sender_id = $1 OR receiver_id= $1) AND id = $2`,
+			[user_id, message_id]
+		);
+		res.status(200).send(response);
+	} catch (err) {
+		res.status(400).send(err.message);
+	}
+};
