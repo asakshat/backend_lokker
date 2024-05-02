@@ -6,12 +6,6 @@ import groupRoute from './routes/groupRoute.mjs';
 import directMessageRoute from './routes/directMessageRoute.mjs';
 import { authenticateToken } from './middlewares/authenticate.mjs';
 import cors from 'cors';
-import { executeQuery } from './configs/database.mjs';
-const users = await executeQuery(
-	'SELECT DISTINCT CASE WHEN sender_id = $1 THEN receiver_id ELSE sender_id END AS user_id FROM "DirectMessage" WHERE sender_id = $1 OR receiver_id = $1',
-	['49e49736-c3eb-4c45-a446-ecff0d5ce0d5']
-);
-console.log(users);
 
 dotenv.config();
 
