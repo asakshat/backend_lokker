@@ -9,5 +9,6 @@ const router = express.Router();
 router.post('/join', joinGroup);
 router.post('/leave', leaveGroup);
 router.post('/postmessage', postMessage);
+router.get('/list/:user_id', listGroup);
 
 export default router;
