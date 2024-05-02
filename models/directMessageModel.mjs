@@ -15,12 +15,9 @@ export const sendDirectMessageFunction = async (
 		throw Error('Message cannot be empty');
 	}
 	const result = await executeQuery(
-		'INSERT INTO "DirectMessage" (sender_id, receiver_id, message) VALUES ($1, $2, $3) RETURNING *',
+		'INSERT INTO "DirectMessage" (sender_id, receiver_id, message) VALUES ($1, $2, $3)',
 		[sender_id, receiver_id, message]
 	);
-
-	const newMessage = result.rows[0];
-	return newMessage;
 };
 
 export const getDirectMessagesFunction = async (sender_id, receiver_id) => {
