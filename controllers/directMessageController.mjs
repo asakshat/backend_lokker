@@ -30,11 +30,13 @@ export const messagedUsers = async (req, res) => {
 	const { sender_id } = req.params;
 	try {
 		const users = await executeQuery(
-			'SELECT DISTINCT CASE WHEN sender_id = $1 THEN receiver_id ELSE sender_id END AS user_id FROM "DirectMessage" WHERE sender_id = $1 OR receiver_id = $1',
+			`SELECT DISTINCT CASE WHEN dm.sender_id = $1 THEN dm.receiver_id ELSE dm.sender_id END AS user_id, u.username 
+            FROM "DirectMessage" dm 
+            JOIN "Users" u ON u.user_id = CASE WHEN dm.sender_id = $1 THEN dm.receiver_id ELSE dm.sender_id END 
+            WHERE dm.sender_id = $1 OR dm.receiver_id = $1`,
 			[sender_id]
 		);
-		const response = users.map((user) => user.user_id);
-		res.status(200).json(response);
+		res.status(200).json(users);
 	} catch (err) {
 		res.status(400).json({ error: err.message });
 	}
