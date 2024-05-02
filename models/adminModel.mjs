@@ -20,7 +20,7 @@ export const createGroupFunction = async (group_name, group_admin) => {
 		[group_name, group_admin]
 	);
 	await executeQuery(
-		'INSERT INTO "GroupMembers"(user_id, group_id) VALUES ($1,$2)',
+		'INSERT INTO "GroupMember"(user_id, group_id) VALUES ($1,$2)',
 		[group_admin, group[0].group_id]
 	);
 	return group;
