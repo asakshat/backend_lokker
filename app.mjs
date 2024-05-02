@@ -12,8 +12,9 @@ dotenv.config();
 const app = express();
 
 const allowedOrigins = [
-	'https://lokkerroom-d7516.web.app/',
+	'https://lokkerroom-d7516.web.app',
 	'http://127.0.0.1:5173',
+	'http://localhost:5173',
 ];
 const corsOptions = {
 	origin: (origin, callback) => {
