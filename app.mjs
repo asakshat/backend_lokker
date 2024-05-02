@@ -28,7 +28,7 @@ const corsOptions = {
 	allowedHeaders: ['Content-Type', 'Authorization', 'username'],
 };
 
-app.use(cors(corsOption));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
