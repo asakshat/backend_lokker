@@ -6,8 +6,6 @@ import groupRoute from './routes/groupRoute.mjs';
 import directMessageRoute from './routes/directMessageRoute.mjs';
 import { authenticateToken } from './middlewares/authenticate.mjs';
 import cors from 'cors';
-import { Server } from 'http';
-import { Server as SocketIOServer } from 'socket.io';
 
 dotenv.config();
 
@@ -34,24 +32,6 @@ app.use('/api/admin', adminRoute);
 app.use('/api/group', groupRoute);
 app.use('/api/directmessage', directMessageRoute);
 
-const httpServer = Server(app);
-export const io = new SocketIOServer(httpServer, {
-	cors: {
-		origin: 'http://localhost:5173',
-	},
+app.listen(port, () => {
+	console.log(`Server is running on port ${port}`);
 });
-
-let onlineUser = [];
-
-io.on('connection', (socket) => {
-	console.log('new connection', socket.id);
-	socket.on('online', (userId) => {
-		!onlineUser.some((user) => user.userId === userId) &&
-			onlineUser.push({ userId, socketId: socket.id });
-	});
-});
-
-httpServer.listen(port, () => {
-	console.log(`Server is running at http://localhost:${port}`);
-});
-n;
