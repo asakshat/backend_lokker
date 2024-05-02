@@ -14,11 +14,12 @@ export const sendDirectMessageFunction = async (
 	if (message.length === 0) {
 		throw Error('Message cannot be empty');
 	}
-	const messageText = await executeQuery(
-		'INSERT INTO "DirectMessage" (sender_id, receiver_id, message) VALUES ($1, $2, $3)',
+	const result = await executeQuery(
+		'INSERT INTO "DirectMessage" (sender_id, receiver_id, message) VALUES ($1, $2, $3) RETURNING *',
 		[sender_id, receiver_id, message]
 	);
-	const newMessage = messageText.rows[0];
+
+	const newMessage = result.rows[0];
 	return newMessage;
 };
 
