@@ -8,12 +8,7 @@ export const sendDirectMessage = async (req, res) => {
 	const { sender_id, receiver_id } = req.params;
 	const { message } = req.body;
 	try {
-		const newMessage = await sendDirectMessageFunction(
-			sender_id,
-			receiver_id,
-			message
-		);
-		res.status(200).json(newMessage);
+		await sendDirectMessageFunction(sender_id, receiver_id, message);
 	} catch (err) {
 		res.status(400).send(err.message);
 	}
