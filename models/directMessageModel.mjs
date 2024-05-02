@@ -25,8 +25,9 @@ export const getDirectMessagesFunction = async (sender_id, receiver_id) => {
 	if (!sender_id || !receiver_id) {
 		throw Error('Please provide sender_id and receiver_id');
 	}
+	const offset = (page - 1) * pageSize;
 	const messages = await executeQuery(
-		'SELECT * FROM "DirectMessage" WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1)',
+		'SELECT * FROM "DirectMessage" WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1) ORDER BY sent_at DESC',
 		[sender_id, receiver_id]
 	);
 	return messages;
