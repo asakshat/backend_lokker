@@ -3,6 +3,7 @@ import {
 	joinGroup,
 	leaveGroup,
 	postMessage,
+	listGroup,
 } from '../controllers/groupController.mjs';
 const router = express.Router();
 
