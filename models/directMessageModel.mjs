@@ -18,6 +18,7 @@ export const sendDirectMessageFunction = async (
 		'INSERT INTO "DirectMessage" (sender_id, receiver_id, message) VALUES ($1, $2, $3)',
 		[sender_id, receiver_id, message]
 	);
+	return result;
 };
 
 export const getDirectMessagesFunction = async (sender_id, receiver_id) => {
