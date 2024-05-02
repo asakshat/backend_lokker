@@ -35,6 +35,6 @@ export const messagedUsers = async (req, res) => {
 		const response = users.map((user) => user.user_id);
 		res.status(200).json(response);
 	} catch (err) {
-		res.status(400).send(err.message);
+		res.status(400).json({ error: err.message });
 	}
 };
