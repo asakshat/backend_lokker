@@ -4,7 +4,7 @@
 
 ### Description :
 
-A chat room app created using React for the frontend([repo link](repolink)) and an express server as a backend with Postgresql.
+A chat room app created using React for the frontend([repo link](https://github.com/asakshat/frontend_lokker)) and an express server as a backend with Postgresql.
 
 ---
 
