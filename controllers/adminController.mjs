@@ -23,14 +23,12 @@ export const createGroup = async (req, res) => {
 	);
 	if (groupName.length > 0) {
 		res.status(400).send('Group name already exists');
-	} else if (group_name.length === 0) {
+	} else {
 		try {
 			const group = await createGroupFunction(group_name, group_admin);
 			res.status(200).send(group);
 		} catch (err) {
 			res.status(400).send(err.message);
 		}
-	} else {
-		res.status(400).send('Invalid group name');
 	}
 };
