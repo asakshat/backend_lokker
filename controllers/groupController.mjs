@@ -66,7 +66,10 @@ const listMessages = async (req, res) => {
 const listMember = async (req, res) => {
 	try {
 		const { group_id } = req.params;
-		const query = `SELECT * FROM "GroupMember" WHERE group_id = $1`;
+		const query = `SELECT u.username 
+                       FROM "GroupMember" gm 
+                       INNER JOIN "User" u ON gm.user_id = u.user_id 
+                       WHERE gm.group_id = $1`;
 		const members = await executeQuery(query, [group_id]);
 		res.status(200).send(members);
 	} catch (err) {
