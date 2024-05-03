@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { findUserIdByUsername } from '../configs/queries.mjs';
 import { promisify } from 'util';
-import { access } from 'fs';
+
 import { executeQuery } from '../configs/database.mjs';
 
 dotenv.config();
