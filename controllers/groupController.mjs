@@ -27,9 +27,10 @@ const leaveGroup = async (req, res) => {
 };
 
 const postMessage = async (req, res) => {
-	const { user_id, group_id } = req.body;
+	const { user_id, group_id } = req.params;
+	const { message } = req.body;
 	try {
-		await postMessageFunction(user_id, group_id);
+		await postMessageFunction(user_id, group_id, message);
 		res.status(200).send('Message posted');
 	} catch (err) {
 		res.status(400).send(err.message);
