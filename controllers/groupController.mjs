@@ -30,8 +30,8 @@ const postMessage = async (req, res) => {
 	const { user_id, group_id } = req.params;
 	const { message } = req.body;
 	try {
-		await postMessageFunction(user_id, group_id, message);
-		res.status(200).send('Message posted');
+		const response = await postMessageFunction(user_id, group_id, message);
+		res.status(200).send(response);
 	} catch (err) {
 		res.status(400).send(err.message);
 	}

@@ -45,7 +45,7 @@ export const leaveGroupFunction = async (user_id, group_id) => {
 
 export const postMessageFunction = async (user_id, group_id, message) => {
 	const message = await executeQuery(
-		'INSERT INTO "Message"(user_id,group_id, message) VALUES ($1,$2,$3)',
+		'INSERT INTO "Message"(user_id,group_id,message) VALUES ($1,$2,$3)',
 		[user_id, group_id, message]
 	);
 	return message;
