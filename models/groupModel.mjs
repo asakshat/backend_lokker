@@ -48,5 +48,5 @@ export const postMessageFunction = async (user_id, group_id, message) => {
 		'INSERT INTO "Message"(user_id,group_id,message) VALUES ($1,$2,$3) RETURNING *',
 		[user_id, group_id, message]
 	);
-	return result.rows[0];
+	return result;
 };
