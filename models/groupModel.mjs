@@ -1,3 +1,4 @@
+import { executeQuery } from '../configs/database.mjs';
 export const joinGroupFunction = async (user_id, group_id) => {
 	const group = await executeQuery(
 		'SELECT group_id FROM "Group" WHERE group_id = $1',
