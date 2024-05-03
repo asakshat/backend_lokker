@@ -48,9 +48,7 @@ export const postMessageFunction = async (user_id, group_id) => {
 		'SELECT group_id FROM "Group" WHERE group_id = $1',
 		[group_id]
 	);
-	if (group.length === 0) {
-		throw Error('Invalid group');
-	}
+
 	const member = await executeQuery(
 		'SELECT user_id FROM "GroupMembers" WHERE user_id = $1 AND group_id = $2',
 		[user_id, group_id]
