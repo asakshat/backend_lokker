@@ -50,7 +50,7 @@ export const postMessageFunction = async (user_id, group_id) => {
 	);
 
 	const member = await executeQuery(
-		'SELECT user_id FROM "GroupMembers" WHERE user_id = $1 AND group_id = $2',
+		'SELECT user_id FROM "GroupMember" WHERE user_id = $1 AND group_id = $2',
 		[user_id, group_id]
 	);
 	if (member.length === 0) {
