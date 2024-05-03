@@ -63,4 +63,15 @@ const listMessages = async (req, res) => {
 	}
 };
 
+const listMember = async (req, res) => {
+	try {
+		const { group_id } = req.params;
+		const query = `SELECT * FROM "GroupMember" WHERE group_id = $1`;
+		const members = await executeQuery(query, [group_id]);
+		res.status(200).send(members);
+	} catch (err) {
+		res.status(400).send(err.message);
+	}
+};
+
 export { joinGroup, leaveGroup, postMessage, listGroup, listMessages };
