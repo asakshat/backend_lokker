@@ -1,6 +1,10 @@
 /* eslint-disable no-unused-vars */
 import bcrypt from 'bcrypt';
-import { findEmail, findUsername } from '../configs/queries.mjs';
+import {
+	findEmail,
+	findUserIdByUsername,
+	findUsername,
+} from '../configs/queries.mjs';
 import { executeQuery } from '../configs/database.mjs';
 import validator from 'validator';
 
@@ -28,6 +32,11 @@ export const signUpFunction = async (username, email, password) => {
 			'INSERT INTO "User"(username,email,password_hash) VALUES ($1,$2,$3)',
 			[username, email, hash]
 		);
+		const userId = await findUserIdByUsername(username);
+		await executeQuery(
+			'INSERT INTO "GroupMember"(user_id,group_id) VALUES ($1,$2)',
+			[userId, 70]
+		);
 	}
 };
 
@@ -47,6 +56,7 @@ export const loginFunction = async (email, password) => {
 		if (!match) {
 			throw Error('Invalid password');
 		}
+
 		return user[0];
 	}
 };
