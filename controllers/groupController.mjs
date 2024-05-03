@@ -51,5 +51,15 @@ const listGroup = async (req, res) => {
 		res.status(400).send(err.message);
 	}
 };
+const listMessages = async (req, res) => {
+	try {
+		const group_id = req.params.group_id;
+		const query = `SELECT * FROM "Message" WHERE group_id = $1`;
+		const messages = await executeQuery(query, [group_id]);
+		res.status(200).send(messages);
+	} catch (err) {
+		res.status(400).send(err.message);
+	}
+};
 
-export { joinGroup, leaveGroup, postMessage, listGroup };
+export { joinGroup, leaveGroup, postMessage, listGroup, listMessages };
