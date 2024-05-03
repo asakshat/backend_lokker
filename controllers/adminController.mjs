@@ -21,7 +21,7 @@ export const createGroup = async (req, res) => {
 		'SELECT group_name FROM "Group" where group_name = $1',
 		[group_name]
 	);
-	if (groupName.length !== 0) {
+	if (groupName.length > 0) {
 		res.status(400).send('Group name already exists');
 	}
 	try {
