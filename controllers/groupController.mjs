@@ -74,4 +74,11 @@ const listMember = async (req, res) => {
 	}
 };
 
-export { joinGroup, leaveGroup, postMessage, listGroup, listMessages };
+export {
+	joinGroup,
+	leaveGroup,
+	postMessage,
+	listGroup,
+	listMessages,
+	listMember,
+};
