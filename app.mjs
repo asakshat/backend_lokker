@@ -36,6 +36,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
 	res.send('Hello Express');
 });
+
 app.get('/verifytoken', authenticateToken, (req, res) => {
 	res.status(200).send('Token is valid');
 });
