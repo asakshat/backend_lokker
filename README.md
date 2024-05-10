@@ -35,11 +35,11 @@ A chat room app created using React for the frontend([repo link](https://github.
 
 <!-- prettier-ignore -->
 
-| login | signup |
+| Endpoint      | Description |
+| ------------- | ----------- |
+| `/api/user/login` | User login   |
+| `/api/user/signup` | User signup |
 
-|--|--|
-
-| /api/user/login | /api/user/signup|
 
   
 
@@ -48,12 +48,11 @@ A chat room app created using React for the frontend([repo link](https://github.
   
 
 <!-- prettier-ignore -->
+| Endpoint                           | Description        |
+| ---------------------------------- | ------------------ |
+| `/api/admin/createGroup/:group_admin` | Create a group     |
+| `/api/admin/deletemessage/:group_id/:message_id` | Delete a message |
 
-| create group |delete message |
-
-|--|--|
-
-| /api/admin/createGroup/:group_admin | /api/admin/deletemessage/:group_id/:message:id |
 
   
 
