@@ -32,3 +32,32 @@ export const createGroup = async (req, res) => {
 		}
 	}
 };
+
+export const addUserToGroup = async (req, res) => {
+    const { group_id, user_id } = req.params;
+    try {
+        const userExists = await executeQuery(
+            'SELECT * FROM "User" WHERE user_id = $1',
+            [user_id]
+        );
+        if (userExists.length === 0) {
+            return res.status(404).send('User not found');
+        }
+
+        const isMember = await executeQuery(
+            'SELECT * FROM "GroupMember" WHERE user_id = $1 AND group_id = $2',
+            [user_id, group_id]
+        );
+        if (isMember.length > 0) {
+            return res.status(400).send('User is already a member of the group');
+        }
+
+        await executeQuery(
+            'INSERT INTO "GroupMember" (user_id, group_id) VALUES ($1, $2)',
+            [user_id, group_id]
+        );
+        res.status(200).send('User added to the group successfully');
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+};
