@@ -20,7 +20,7 @@ A chat room app created using React for the frontend([repo link](https://github.
 ### Guide
 
 - Make sure to npm install before you start
-- Make sure your **.env** file as the proper values
+- Make sure your **.env** file has the proper values
  i.e :- `SECRET = <YOUR-SECRET-CODE>`  & `PORT = <YOUR PORT>`
 
 - To execute any sql query inside js file just use executeQuery (Parameterized queries)
