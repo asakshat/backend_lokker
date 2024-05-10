@@ -33,7 +33,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
 	res.send('Hello Express');
 });
@@ -49,6 +48,6 @@ app.use('/api/admin', adminRoute);
 app.use('/api/group', groupRoute);
 app.use('/api/directmessage', directMessageRoute);
 
-app.listen(port, () => {
+app.listen(PORT, () => {
 	console.log(`Server is running on port ${port}`);
 });
