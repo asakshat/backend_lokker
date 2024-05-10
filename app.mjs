@@ -8,7 +8,7 @@ import { authenticateToken } from './middlewares/authenticate.mjs';
 import cors from 'cors';
 
 dotenv.config();
-
+const port = process.env.PORT || 3000;
 const app = express();
 
 
@@ -48,6 +48,6 @@ app.use('/api/admin', adminRoute);
 app.use('/api/group', groupRoute);
 app.use('/api/directmessage', directMessageRoute);
 
-app.listen(PORT, () => {
+app.listen(port), () => {
 	console.log(`Server is running on port ${port}`);
-});
+};
